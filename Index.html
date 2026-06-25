@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-en="THE BEST Platform" data-lang-ar="منصة THE BEST">THE BEST Platform</title>
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --accent-blue: #38bdf8;
+            --accent-red: #ef4444;
+            --accent-purple: #a855f7;
+            --text-white: #f8fafc;
+            --border-color: #334155;
+            --accent-green: #22c55e;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-white);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* PREMIUM LOGIN SCREEN */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #1e1b4b 0%, var(--bg-main) 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: 0.5s ease-in-out;
+        }
+
+        .login-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 35px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .login-card h1 {
+            font-size: 32px;
+            color: var(--accent-blue);
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
+
+        .login-card p {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+            text-align: right;
+        }
+        
+        [dir="ltr"] .input-group {
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: rgba(15, 23, 42, 0.6);
+            color: white;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+            outline: none;
+        }
+
+        .toggle-password {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #64748b;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+        
+        [dir="ltr"] .toggle-password {
+            right: 15px;
+            left: auto;
+        }
+        
+        .toggle-password svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+        
+        .toggle-password:hover {
+            color: var(--text-white);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent-blue), #0ea5e9);
+            color: #0f172a;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+            margin-bottom: 15px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+        }
+
+        /* MAIN APPLICATION LAYOUT */
+        .sidebar {
+            width: 280px;
+            background-color: var(--bg-card);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-color); 
+            height: 100vh;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        [dir="ltr"] .sidebar {
+            border-right: 1px solid var(--border-color);
+            border-left: none;
+        }
+
+        .sidebar-top-scroll {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .profile-section {
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .profile-img-placeholder {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-blue);
+            background-color: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+            margin: 0 auto 8px auto;
+        }
+
+        .profile-section h3 {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+
+        .admin-badge {
+            background-color: rgba(56, 189, 248, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        .settings-nav-btn {
+            background: rgba(56, 189, 248, 0.08);
+            color: var(--accent-blue);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 12px;
+            transition: 0.3s;
+        }
+        
+        .settings-nav-btn:hover {
+            background: var(--accent-blue);
+            color: #0f172a;
+        }
+
+        .logout-container {
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+        }
+
+        .logout-btn {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--accent-red);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background: var(--accent-red);
+            color: white;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 25px;
+            overflow-y: auto;
+            box-sizing: border-box;
+            transition: 0.3s;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lang-switch-wrapper {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-card);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+        
+        .lang-btn.active {
+            background: var(--accent-blue);
+            color: #0f172a;
+        }
+        
+        .lang-btn:hover:not(.active) {
+            color: var(--text-white);
+        }
+
+        .points-box {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-purple);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.15);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .points-box h2 {
+            margin: 0 0 15px 0;
+            color: var(--accent-purple);
+            font-size: 26px;
+        }
+
+        .points-counter {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--text-white);
+            margin-bottom: 20px;
+        }
+
+        .add-points-btn {
+            background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .add-points-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(168, 85, 247, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-screen" id="loginScreen">
+        <div class="login-card">
+            <h1 data-lang-en="THE BEST" data-lang-ar="THE BEST">THE BEST</h1>
+            <p data-lang-en="Smart Learning Platform" data-lang-ar="منصة التعلم الذكية">Smart Learning Platform</p>
+            
+            <div class="input-group">
+                <label data-lang-en="Full Name" data-lang-ar="اسمك الكامل">Full Name</label>
+                <input type="text" id="usernameInput" placeholder="أدخل اسمك الكامل..." required>
+            </div>
+            <div class="input-group">
+                <label data-lang-en="Password" data-lang-ar="كلمة المرور">Password</label>
+                <div class="input-wrapper">
+                    <input type="password" id="passwordInput" placeholder="أدخل كلمة المرور..." required>
+                    <span class="toggle-password" onclick="togglePassword()">👁️</span>
+                </div>
+            </div>
+            <button class="login-btn" onclick="loginApp()" data-lang-en="Login Platform" data-lang-ar="تسجيل الدخول">Login Platform</button>
+        </div>
+    </div>
+
+    <div class="sidebar" id="sidebarSection" style="display: none;">
+        <div class="sidebar-top-scroll">
+            <div class="profile-section">
+                <div class="profile-img-placeholder">🤖</div>
+                <h3 id="profileName">Student Name</h3>
+                <span class="admin-badge" data-lang-en="Active Account" data-lang-ar="حساب نشط">Active Account</span>
+            </div>
+            
+            <div class="settings-nav-btn" onclick="alert('تم النقر على الإعدادات')" data-lang-en="⚙️ Settings" data-lang-ar="⚙️ الإعدادات">⚙️ Settings</div>
+        </div>
+        <div class="logout-container">
+            <button class="logout-btn" onclick="logoutApp()" data-lang-en="Logout" data-lang-ar="تسجيل الخروج">Logout</button>
+        </div>
+    </div>
+
+    <div class="main-content" id="mainContent" style="display: none;">
+        <div class="lang-switch-wrapper">
+            <button class="lang-btn active" id="btnAr" onclick="setLanguage('ar')">العربية</button>
+            <button class="lang-btn" id="btnEn" onclick="setLanguage('setEn')">English</button>
+        </div>
+
+        <div class="points-box">
+            <h2>🎉 <span data-lang-en="Your Points" data-lang-ar="نقاطك">Your Points</span></h2>
+            <div class="points-counter" id="pointsDisplay">0</div>
+            <button class="add-points-btn" onclick="addPoints()" data-lang-en="+10 Points" data-lang-ar="إضافة 10 نقاط">+10 Points</button>
+        </div>
+    </div>
+
+    <script>
+        let pointsCount = 0;
+        let currentLang = 'ar';
+
+        function togglePassword() {
+            const pwInput = document.getElementById('passwordInput');
+            if (pwInput.type === 'password') {
+                pwInput.type = 'text';
+            } else {
+                pwInput.type = 'password';
+            }
+        }
+
+        function loginApp() {
+            const nameVal = document.getElementById('usernameInput').value.trim();
+            const passVal = document.getElementById('passwordInput').value.trim();
+            
+            if (nameVal === '' || passVal === '') {
+                alert(currentLang === 'ar' ? 'يرجى إدخال الاسم وكلمة المرور!' : 'Please fill in all fields!');
+                return;
+            }
+
+            document.getElementById('profileName').innerText = nameVal;
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('sidebarSection').style.display = 'flex';
+            document.getElementById('mainContent').style.display = 'flex';
+        }
+
+        function logoutApp() {
+            document.getElementById('usernameInput').value = '';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('sidebarSection').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'none';
+        }
+
+        function addPoints() {
+            pointsCount += 10;
+            document.getElementById('pointsDisplay').innerText = pointsCount;
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang === 'ar' ? 'ar' : 'en';
+            const htmlTag = document.getElementById('htmlApp');
+            
+            if(currentLang === 'ar') {
+                htmlTag.setAttribute('dir', 'rtl');
+                htmlTag.setAttribute('lang', 'ar');
+                document.getElementById('btnAr').classList.add('active');
+                document.getElementById('btnEn').classList.remove('active');
+            } else {
+                htmlTag.setAttribute('dir', 'ltr');
+                htmlTag.setAttribute('lang', 'en');
+                document.getElementById('btnEn').classList.add('active');
+                document.getElementById('btnAr').classList.remove('active');
+            }
+
+            // تبديل النصوص المحددة بـ data-lang
+            document.querySelectorAll('[data-lang-' + currentLang + ']').forEach(element => {
+                const translation = element.getAttribute('data-lang-' + currentLang);
+                if(translation) element.innerText = translation;
+            });
+            
+            // تبديل الـ Placeholders
+            document.querySelectorAll('input').forEach(input => {
+                const ph = input.getAttribute('data-placeholder-' + currentLang);
+                if(ph) input.placeholder = ph;
+            });
+        }
+    </script>
+</body>
+</html>
